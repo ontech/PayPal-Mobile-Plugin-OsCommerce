@@ -2,7 +2,7 @@
 
 1. Click the 'ZIP' button at the top of this page to download the plugin.
 
-2. If you haven't already setup PayPal Express Checkout inside your OsCommerce installation, please follow these instructions, if you have already done so, please skip to step 2:
+2. If you haven't already setup PayPal Express Checkout inside your OsCommerce installation, please follow these instructions, if you have already done so, please skip to step 3:
         a. Login into your PayPal account
         b. Under the 'My Account' tab, click 'Profile'
         c. Under the 'Selling Online' section, click the 'Update' button next the API Access line.
