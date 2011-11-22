@@ -19,6 +19,11 @@
 </head>
 <body>
 
+<?php
+    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+    $product_info = tep_db_fetch_array($product_info_query);
+?>
+
 <div data-role="page" data-theme="b" data-fullscreen="true">
 
 	<div data-role="header" data-position="fixed" data-theme="b" style="text-align: right;">
@@ -30,7 +35,7 @@
 	<div style="height:350px;">
 		<div style="position: relative;">
 			<img style="display: none; z-index: 1; position: absolute;" id="loading" src="/images/ajax-loader.gif" />
-			<img id="hero" src="/productimage_{ID}.jpg?width=470" width="100%" style="max-height:350px; max-width:370px; display:block; margin-left:auto; margin-right:auto;" />
+			<img id="hero" src="/images/<?php echo $product_info['products_image']; ?>" width="100%" style="max-height:350px; max-width:370px; display:block; margin-left:auto; margin-right:auto;" />
 		</div>
 	</div>
 	</div>
@@ -38,9 +43,7 @@
 	<div data-role="footer" data-position="fixed" data-theme="a">
 	<ul class="gallery-icon-list" style="overflow: auto; clear: both;">
 		<li><a rel="external" href="/productimage_{ID}.jpg?width=470"><img src="/productimage_{ID}.jpg?width=64&height=64" /></a></li>
-		{for gallery}
-			<li><a rel="external" href="{src}?width=470"><img src="{src}?width=64&height=64" /></a></li>
-		{/for}
+			<li><a rel="external" href="{src}?width=470"></a></li>
 	</ul>
 	</div>
 	

@@ -117,7 +117,7 @@ if(matchproduct()) {
 
 function matchgallery() {
 	$subject = $_SERVER['REQUEST_URI'];
-	$pattern = '/^\/gallery\d+\.htm(?:$|\?)/';
+	$pattern = '/gallery/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
 		return true;
@@ -128,7 +128,7 @@ function matchgallery() {
 
 if(matchgallery()) {
 	$select_column_list = 'pd.products_name, p.products_image, ';
-	require('includes/index_filters/default_filter.php');
+	//require('includes/index_filters/default_filter.php');
 	include 'mobile/gallery.php';
 	die();
 }

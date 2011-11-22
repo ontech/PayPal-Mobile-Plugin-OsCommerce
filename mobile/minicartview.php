@@ -35,7 +35,7 @@ for ($i=0;$i<sizeof($products);$i++) {
 		<table>	
 			<tr>
 				<td><div style="width:30px;"><?php echo $products[$i]['quantity'];?></div></td>
-				<td align="left"><div style="width:180px; padding-top:5px; height:20px; white-space:nowrap; overflow: hidden; text-overflow:ellipsis;"><a href="/prod{SKUID}.htm"><?php echo $products[$i]['name']; ?></a></div></td>
+				<td align="left"><div style="width:180px; padding-top:5px; height:20px; white-space:nowrap; overflow: hidden; text-overflow:ellipsis;"><?php echo $products[$i]['name']; ?></div></td>
 				<td align="left"><div style="width:60px;">$<?php echo number_format(($products[$i]['final_price'] * $products[$i]['quantity']), 2); ?></div></td>
 			</tr>
 		</table>

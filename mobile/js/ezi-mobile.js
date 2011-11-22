@@ -1,15 +1,14 @@
 var CartItemCount = "...";
 var MiniCart;
 
-$("[data-role=page]").live('pageshow', function(){		
+$("#mainpage").live('pageshow', function(){
 
 	$(".ui-li").removeClass("prodclick");
 
 	$('.productform').submit(function(evt) {
-
-		//var formdata = $(this).serialize();
-		//alert(formdata);
-	
+		
+		evt.preventDefault();
+		
 		if(MiniCart)
 		{
 			$("#cartpanel").children().remove();

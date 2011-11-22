@@ -6,7 +6,15 @@
 #cart th {
 	text-align:left;
 	background:#eee;
-	padding:4px;
+	padding:6px;
+	border: 1px solid #456F9A;
+	background: #5E87B0;
+	color: white;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #254F7A;
+	background-image: -moz-linear-gradient(top,#81a8ce,#5e87b0);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#81a8ce),color-stop(1,#5e87b0));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#81a8ce', EndColorStr='#5e87b0')"
 }
 
 #cart .update input,
@@ -16,11 +24,11 @@
 	display:none;
 }
 #cart table td {
-	padding:4px;
+	padding:6px;
 	vertical-align:middle !important;
 }
 #cart table td input[type="text"] {
-	width:28px;
+	width:24px;
 }
 
 .ui-content .ui-listview-inset {

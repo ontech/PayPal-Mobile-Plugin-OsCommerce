@@ -12,7 +12,7 @@
 	} else {
 ?>
 
-<table id="cart">
+<table id="cart" cellpadding="5" align="center">
 <tr>
 	<th>Qty</th>
 	<th> </th>
