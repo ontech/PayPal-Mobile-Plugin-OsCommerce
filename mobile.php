@@ -9,7 +9,7 @@
 
 <?php
 function matchhome() {
-	global $bm_categories, $tree;
+	global $bm_categories, $tree, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/^\/(?:$|\?)/';
 	preg_match($pattern, $subject, $matches);
@@ -31,7 +31,7 @@ if(matchhome()) {
 }
 
 function matchcart() {
-	global $bm_categories, $tree, $cart, $cartShowTotal;
+	global $bm_categories, $tree, $cart, $cartShowTotal, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/(index.php\?main_page=shopping_cart|shopping_cart.php)/';
 	preg_match($pattern, $subject, $matches);
@@ -43,7 +43,7 @@ function matchcart() {
 matchcart();
 
 function matchcheckoutsuccess(){
-	global $zv_orders_id, $orders_id, $orders, $define_page;
+	global $zv_orders_id, $orders_id, $orders, $define_page, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/index.php\?main_page=checkout_success/';
 	preg_match($pattern, $subject, $matches);
@@ -55,7 +55,7 @@ function matchcheckoutsuccess(){
 matchcheckoutsuccess();
 
 function matchminicart() {
-	global $cart, $cartShowTotal;
+	global $cart, $cartShowTotal, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/minicart.php/';
 	preg_match($pattern, $subject, $matches);
@@ -67,7 +67,7 @@ function matchminicart() {
 matchminicart();
 
 function matchminicartview() {
-	global $cart, $cartShowTotal;
+	global $cart, $cartShowTotal, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/minicartview.php/';
 	preg_match($pattern, $subject, $matches);
@@ -79,6 +79,8 @@ function matchminicartview() {
 matchminicartview();
 
 function matchcategory(){
+	global $currency;
+
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/category/';
 	preg_match($pattern, $subject, $matches);
@@ -100,7 +102,7 @@ if(matchcategory())
 }
 
 function matchproduct() {
-	global $sql;
+	global $sql, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/^\/prod\d+\.htm(?:$|\?)/';
 	preg_match($pattern, $subject, $matches);
@@ -116,6 +118,8 @@ if(matchproduct()) {
 }
 
 function matchgallery() {
+	global $currency;
+
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/gallery/';
 	preg_match($pattern, $subject, $matches);
@@ -134,6 +138,8 @@ if(matchgallery()) {
 }
 
 function matchsearch() {
+	global $currency;
+
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/(^\/search\/?(?:$|\?)|^\/advanced_search_result.php)/';
 	preg_match($pattern, $subject, $matches);

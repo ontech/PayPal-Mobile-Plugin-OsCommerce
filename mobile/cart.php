@@ -98,8 +98,8 @@
 	}
 ?>
 <tr>
-	<td colspan="3" align="right">Total</td>
-	<td>$<?php echo number_format($cart->show_total(), 2); ?></td>
+	<td colspan="3" align="right" style="font-weight: bolder;">Total <?php echo $currency; ?></td>
+	<td style="font-weight: bolder;">$<?php echo number_format($cart->show_total(), 2); ?></td>
 </tr>
 <tr>
 <td colspan="5" style="text-align:center;">
