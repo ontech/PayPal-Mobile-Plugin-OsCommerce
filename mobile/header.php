@@ -34,7 +34,7 @@ style="vertical-align: top; margin-top: -4px; margin-left: -2px; max-height: 45p
 	            <li><a id="home" href="/">Home</a><span class="ui-icon ui-icon-custom"></span></li>
 	            <li><a id="categories" rel="external">Categories</a><span class="ui-icon ui-icon-custom"></span></li>
 	            <li><a id="search" href="/search/" rel="external">Search</a><span class="ui-icon ui-icon-custom"></span></li>
-	            <li><a id="cartlink" class="carticon" href="/index.php?main_page=shopping_cart" rel="external" class="ui-icon ui-icon-custom">Cart <span class="MiniCartQty" style="text-align:center; font-size: 10px; font-weight: normal; width: 20px; height: 15px; z-index: 200; float: right; padding-left: 1px; padding-bottom: 3px; padding-top:2px;"><?php echo $_SESSION['cart']->count_contents(); ?></span></a></li>
+	            <li><a id="cartlink" class="carticon" href="/index.php?main_page=shopping_cart" rel="external" class="ui-icon ui-icon-custom">Cart <span class="MiniCartQty" style="text-align:center; font-size: 10px; font-weight: normal; width: 20px; height: 15px; z-index: 200; float: right; padding-left: 1px; padding-bottom: 3px; padding-top:2px;"><?php if(isset($_SESSION['cart'])) { echo $_SESSION['cart']->count_contents(); } else { echo 0; } ?></span></a></li>
 	        </ul>
 	    </div><!-- /navbar -->					
 	</div><!-- /header -->	
