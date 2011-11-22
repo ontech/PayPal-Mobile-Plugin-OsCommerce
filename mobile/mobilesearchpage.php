@@ -5,7 +5,7 @@
 		<form action="/search?main_page=advanced_search_result" method="get" class="searchpopup">
 			<table><tr><td>
 			<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" style="width: inherit;">
-				<input class="suggest ui-input-text ui-body-null" type="text" id="searchinput" data-type="search" name="keyword" placeholder="Search" autocomplete="off" value="">
+				<input class="suggest ui-input-text ui-body-null" type="text" id="searchinput" data-type="search" name="keywords" placeholder="Search" autocomplete="off" value="">
 				<a href="#" class="ui-input-clear ui-btn ui-btn-up-b ui-btn-icon-notext ui-btn-corner-all ui-shadow" title="clear text" data-theme="b">
 					<span class="ui-btn-inner ui-btn-corner-all">
 						<span class="ui-btn-text">clear text</span>
