@@ -57,10 +57,15 @@ $listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 
 $listing_query = tep_db_query($listing_split->sql_query);
 ?>
 <ul data-role="listview" data-inset="true" id="products" class="products" style="margin-top: 8px;">
+	<?php $listing = tep_db_fetch_array($listing_query); ?>
+
+	<?php if($listing) { ?>
 	<li data-role="list-divider">Products</li>
+	<?php } ?>
 
 	<?php
-    while ($listing = tep_db_fetch_array($listing_query)) {
+	
+    while ($listing) {
 	$rows++;
 	?>
 		
@@ -109,6 +114,7 @@ $listing_query = tep_db_query($listing_split->sql_query);
 	</li>
 	
 	<?php
+		$listing = tep_db_fetch_array($listing_query);
 	}
 ?>
 
