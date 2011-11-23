@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 
-<h2>
+<div>
 	<?php   for ($i=1;$i<sizeof($breadcrumb->_trail);$i++) { ?>
 	<?php 
 	$str = end(explode('_', $breadcrumb->_trail[$i]['link']));	
@@ -15,7 +15,7 @@
 		};
 		echo $breadcrumb->_trail[$i]['title']; ?></a> >
 	<?php } ?>
-</h2>
+</div>
 
 <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
 	<?php
