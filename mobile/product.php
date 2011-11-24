@@ -13,6 +13,8 @@
 		$str = end(explode('_', $breadcrumb->_trail[$i]['link']));	
 		$catid = preg_replace('[\D]', '', $str);
 		$trailname = $breadcrumb->_trail[$i]['title'];
+		$cpath = array();
+		preg_match("/cPath=[^&]*/", $breadcrumb->_trail[$i]['link'], $cpath);
 	?>
 		<a href="
 		<?php 
@@ -21,7 +23,7 @@
 		} else if($trailname == $theproductname) {
 			echo '#">';
 		} else {
-			echo '/category' . $catid . '_1.htm?cPath='. $catid . '">';
+			echo '/category' . $catid . '_1.htm?'.$cpath[0].'">';
 		};
 		echo $breadcrumb->_trail[$i]['title']; ?></a> >
 	<?php } ?>

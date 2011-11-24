@@ -2,19 +2,25 @@
 
 <div>
 	<?php   for ($i=1;$i<sizeof($breadcrumb->_trail);$i++) { ?>
-	<?php 
-	$str = end(explode('_', $breadcrumb->_trail[$i]['link']));	
-	$catid = preg_replace('[\D]', '', $str);
-	?>
-	<a href="
-		<?php 
-		if($i<=1) {
-			echo '/">';
-		} else {
-			echo '/category' . $catid . '_1.htm?cPath='. $catid . '">';
-		};
-		echo $breadcrumb->_trail[$i]['title']; ?></a> >
-	<?php } ?>
+
+        <?php
+                $str = end(explode('_', $breadcrumb->_trail[$i]['link']));
+                $catid = preg_replace('[\D]', '', $str);
+                $trailname = $breadcrumb->_trail[$i]['title'];
+                $cpath = array();
+                preg_match("/cPath=[^&]*/", $breadcrumb->_trail[$i]['link'], $cpath);
+        ?>
+                <a href="
+                <?php
+                if($i<=1) {
+                        echo '/">';
+                } else if($trailname == $theproductname) {
+                        echo '#">';
+                } else {
+                        echo '/category' . $catid . '_1.htm?'.$cpath[0].'">';
+                };
+                echo $breadcrumb->_trail[$i]['title']; ?></a> >
+        <?php } ?>
 </div>
 
 <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
@@ -55,11 +61,12 @@
 <?php
 $listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id', 'page');
 $listing_query = tep_db_query($listing_split->sql_query);
+$listings = 0;
 ?>
 <ul data-role="listview" data-inset="true" id="products" class="products" style="margin-top: 8px;">
 	<?php $listing = tep_db_fetch_array($listing_query); ?>
 
-	<?php if($listing) { ?>
+	<?php if($listing) { $listings = 1; ?>
 	<li data-role="list-divider">Products</li>
 	<?php } ?>
 
@@ -119,6 +126,13 @@ $listing_query = tep_db_query($listing_split->sql_query);
 ?>
 
 </ul>
+
+<?php
+if($number_of_categories == 0 && $listings == 0)
+{
+	echo "No Products in this category";
+}
+?>
 
 <?php include 'footer.php'; ?>
 
