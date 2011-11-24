@@ -14,6 +14,8 @@ $("#mainpage").live('pageshow', function(){
 			$("#cartpanel").children().remove();
 			MiniCart = false;
 		}
+
+		$("INPUT[type=submit]:enabled").attr("disabled", "disabled").attr("data-mobile", "disabled");
 	
 		$.mobile.showPageLoadingMsg();
 		$.ajax({
@@ -27,7 +29,8 @@ $("#mainpage").live('pageshow', function(){
 					currentquantity = 0;
 			},				
 			complete : function() {
-				$.mobile.hidePageLoadingMsg();				
+				$.mobile.hidePageLoadingMsg();
+				$("INPUT[data-mobile=disabled]").removeAttr("disabled");
 
 				$.ajax({
 					type: "GET",
@@ -211,7 +214,7 @@ $("#search, #categories, .carticon").live("click", function(evt) {
 
 	var Link = $(this);	
 	var Panel = $("#" + {"search" : "searchpanel", "categories" : "cat", "cartlink" : "cartpanel"}[this.id]);	
-
+console.log("hello");
 	if(!Panel.is(":visible"))
 	{
 		var Content = $("[data-role=page] [data-role=content]");
