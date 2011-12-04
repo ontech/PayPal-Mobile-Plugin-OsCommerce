@@ -1,23 +1,29 @@
 <?php include 'header.php'; ?>
 
-<h2>
+<div>
 	<?php   for ($i=1;$i<sizeof($breadcrumb->_trail);$i++) { ?>
-	<?php 
-	$str = end(explode('_', $breadcrumb->_trail[$i]['link']));	
-	$catid = preg_replace('[\D]', '', $str);
-	?>
-	<a href="
-		<?php 
-		if($i<=1) {
-			echo '/">';
-		} else {
-			echo '/category' . $catid . '_1.htm?cPath='. $catid . '">';
-		};
-		echo $breadcrumb->_trail[$i]['title']; ?></a> >
-	<?php } ?>
-</h2>
 
-<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+        <?php
+                $str = end(explode('_', $breadcrumb->_trail[$i]['link']));
+                $catid = preg_replace('[\D]', '', $str);
+                $trailname = $breadcrumb->_trail[$i]['title'];
+                $cpath = array();
+                preg_match("/cPath=[^&]*/", $breadcrumb->_trail[$i]['link'], $cpath);
+        ?>
+                <a href="
+                <?php
+                if($i<=1) {
+                        echo '/">';
+                } else if($trailname == $theproductname) {
+                        echo '#">';
+                } else {
+                        echo '/category' . $catid . '_1.htm?'.$cpath[0].'">';
+                };
+                echo $breadcrumb->_trail[$i]['title']; ?></a> >
+        <?php } ?>
+</div>
+
+<ul data-role="listview" data-inset="true" style="margin-top:15px;">
 	<?php
 			if (isset($cPath) && strpos('_', $cPath)) {
 		// check to see if there are deeper categories within the current category
@@ -44,7 +50,7 @@
 			  $rows++;
 			  $cPath_new = tep_get_path($categories['categories_id']);
 		?>
-				<li class="ui-li ui-li-static ui-body-c"><a href="category<?php echo $categories['categories_id'] ?>_1.htm?cPath=<?php echo $current_category_id ?>_<?php echo $categories['categories_id'] ?>"><?php echo $categories['categories_name']; ?></a></li>
+				<li><a href="category<?php echo $categories['categories_id'] ?>_1.htm?cPath=<?php echo $current_category_id ?>_<?php echo $categories['categories_id'] ?>"><?php echo $categories['categories_name']; ?></a></li>
 		
 			<?php
 			} 
@@ -55,12 +61,18 @@
 <?php
 $listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id', 'page');
 $listing_query = tep_db_query($listing_split->sql_query);
+$listings = 0;
 ?>
 <ul data-role="listview" data-inset="true" id="products" class="products" style="margin-top: 8px;">
+	<?php $listing = tep_db_fetch_array($listing_query); ?>
+
+	<?php if($listing) { $listings = 1; ?>
 	<li data-role="list-divider">Products</li>
+	<?php } ?>
 
 	<?php
-    while ($listing = tep_db_fetch_array($listing_query)) {
+	
+    while ($listing) {
 	$rows++;
 	?>
 		
@@ -109,10 +121,18 @@ $listing_query = tep_db_query($listing_split->sql_query);
 	</li>
 	
 	<?php
+		$listing = tep_db_fetch_array($listing_query);
 	}
 ?>
 
 </ul>
+
+<?php
+if($number_of_categories == 0 && $listings == 0)
+{
+	echo "No Products in this category";
+}
+?>
 
 <?php include 'footer.php'; ?>
 

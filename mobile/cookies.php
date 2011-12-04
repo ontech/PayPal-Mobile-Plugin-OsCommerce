@@ -4,14 +4,6 @@
 
     <link rel="search" type="application/opensearchdescription+xml" href="/osd.xml" title="{if MerchantName}{MerchantName} {/if}Site Search"/>
 
-<script>
-document.cookie = "fred=fred;";
-if(!/fred/i.test(document.cookie))
-{
-	window.location = "/cookies.php";
-}
-</script>
-
 	<script src="mobile/js/jquery-1.6.2.min.js"></script>
 	<script src="mobile/js/jquery.mobile-1.0b3.min.js"></script>
 	<script type="text/javascript" src="mobile/js/ezi-mobile.js?3"></script>
@@ -49,3 +41,15 @@ style="vertical-align: top; margin-top: -4px; margin-left: -2px; max-height: 45p
 
 	<div id="content" data-role="content">	
 	
+
+
+<h3>Cookies are not enabled</h3>
+
+<p>Sorry, cookies are currently not enabled in your browser, cookies are necessary to shop on this site, you will be able to 
+find a preference in your phone's browser to re-enable them again if you wish to do so.</p>
+
+You can <a href="/">click here</a> once you have enabled them again to start shopping.
+
+<?php include 'footer.php' ?>
+
+

@@ -49,7 +49,7 @@ for ($i=0;$i<sizeof($products);$i++) {
 <table>
 <tfoot>
     <tr>
-        <td><div style="width: 214px; padding-top: 5px; text-align: left;">Total</div></td>
+        <td><div style="width: 214px; padding-top: 5px; text-align: left;">Total (<?php echo $currency; ?>)</div></td>
         <td align="left">
             <div style="width:60px;">$<?php echo $_SESSION['cart']->show_total();?></div>
         </td>

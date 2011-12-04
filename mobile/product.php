@@ -5,7 +5,7 @@
     $product_info = tep_db_fetch_array($product_info_query);
 ?>
 
-<h2>
+<div>
 	<?php
 		$theproductname = $product_info['products_name']; 
 		for ($i=1;$i<((sizeof($breadcrumb->_trail))-1);$i++) { ?>
@@ -13,6 +13,8 @@
 		$str = end(explode('_', $breadcrumb->_trail[$i]['link']));	
 		$catid = preg_replace('[\D]', '', $str);
 		$trailname = $breadcrumb->_trail[$i]['title'];
+		$cpath = array();
+		preg_match("/cPath=[^&]*/", $breadcrumb->_trail[$i]['link'], $cpath);
 	?>
 		<a href="
 		<?php 
@@ -21,11 +23,11 @@
 		} else if($trailname == $theproductname) {
 			echo '#">';
 		} else {
-			echo '/category' . $catid . '_1.htm?cPath='. $catid . '">';
+			echo '/category' . $catid . '_1.htm?'.$cpath[0].'">';
 		};
 		echo $breadcrumb->_trail[$i]['title']; ?></a> >
 	<?php } ?>
-</h2>
+</div>
 
 <form method="post" class="productform">
 	<input type="hidden" name="products_id" value="<?php echo $product_info['products_id']; ?>" />

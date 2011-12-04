@@ -1,12 +1,12 @@
 <?php include 'header.php'; ?>
 
-<h2>Search Results</h2>
+<div>Search Results</div>
 
 <form action="/advanced_search_result.php" method="get" class="searchpopup">
 	<table><tr><td>
-		<input class="suggest ui-input-text ui-body-null" type="text" id="searchinput" data-type="search" name="keywords" placeholder="Search" autocomplete="off" value="<?php echo ($_GET['keywords']); ?>">
+		<input class="suggest ui-input-text ui-body-null" type="text" id="searchinput" data-type="search" name="keywords" placeholder="Search" autocomplete="off" value="<?php echo htmlspecialchars(stripslashes($_GET['keywords'])); ?>">
 	</td><td>
-	<input type="submit" value="Go" style="background:none; border:2px solid #dedede; box-shadow:2px 2px 2px 2px #999;  border-radius:10px;"/>
+	<input type="submit" value="Go" style="background:none !important; border:2px solid #dedede; box-shadow:2px 2px 2px 2px #999;  border-radius:10px;" data-role="none" />
 	</td></tr></table>
 </form>
 

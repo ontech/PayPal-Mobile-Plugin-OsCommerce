@@ -14,8 +14,8 @@
 
 <table id="cart" cellpadding="5" align="center">
 <tr>
-	<th>Qty</th>
-	<th> </th>
+	<th style="border-right:0px !important;">Qty</th>
+	<th style="border-left:0px !important;"> &nbsp;</th>
 	<th>Name</th>
 	<th>Price</th>
 	<th>Delete </th>
@@ -98,8 +98,8 @@
 	}
 ?>
 <tr>
-	<td colspan="3" align="right">Total</td>
-	<td>$<?php echo number_format($cart->show_total(), 2); ?></td>
+	<td colspan="3" align="right" style="font-weight: bolder;">Total (<?php echo $currency; ?>)</td>
+	<td style="font-weight: bolder;">$<?php echo number_format($cart->show_total(), 2); ?></td>
 </tr>
 <tr>
 <td colspan="5" style="text-align:center;">
@@ -110,7 +110,8 @@
 
 <div style="text-align:center; padding-top:10px;">
 	<a rel="external" href="/ext/modules/payment/paypal/express.php">
-		    <img src="mobile/images/btn_checkout_278x43.png" />
+		    <img id="paypalbutton" src="mobile/images/btn_checkout_278x43.png" />
+		    <img style="display:none;" src="mobile/images/btn_checkout_278x43down.png" />
     </a>
 </div>
 

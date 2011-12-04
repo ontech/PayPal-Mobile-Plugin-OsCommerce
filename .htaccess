@@ -1,0 +1,57 @@
+# $Id$
+#
+# This is used with Apache WebServers
+#
+# For this to work, you must include the parameter 'Options' to
+# the AllowOverride configuration
+#
+# Example:
+#
+# <Directory "/usr/local/apache/htdocs">
+#   AllowOverride Options
+# </Directory>
+#
+# 'All' with also work. (This configuration is in the
+# apache/conf/httpd.conf file)
+
+# The following makes adjustments to the SSL protocol for Internet
+# Explorer browsers
+
+#<IfModule mod_setenvif.c>
+#  <IfDefine SSL>
+#    SetEnvIf User-Agent ".*MSIE.*" \
+#             nokeepalive ssl-unclean-shutdown \
+#             downgrade-1.0 force-response-1.0
+#  </IfDefine>
+#</IfModule>
+
+# If Search Engine Friendly URLs do not work, try enabling the
+# following Apache configuration parameter
+
+# AcceptPathInfo On
+
+# Fix certain PHP values
+# (commented out by default to prevent errors occuring on certain
+# servers)
+
+# php_value session.use_trans_sid 0
+# php_value register_globals 1
+
+ErrorDocument 404 /mobile/404.php
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI}      !/mobile
+RewriteCond %{REQUEST_URI}      !/includes
+RewriteCond %{REQUEST_URI}      !/images
+RewriteCond %{REQUEST_URI} 		!/ipn_main_handler.php
+RewriteCond %{REQUEST_URI} 		!/checkout_confirmation.php
+RewriteCond %{REQUEST_URI} 		!/checkout_process.php
+RewriteCond %{REQUEST_URI} 		!/ext/modules/payment/paypal/express.php
+RewriteCond %{HTTP_USER_AGENT} /iPhone|Android|\s+Mobile
+RewriteRule .* mobile.php [E=template:phone]
+RewriteCond %{HTTP_USER_AGENT} iPad|(Android^((?!mobile).)*$)
+RewriteRule .* mobile.php [E=template:tablet]
+
+php_value error_reporting 6135
+php_value display_errors on
+
