@@ -44,7 +44,10 @@ function matchcart() {
 matchcart();
 
 function matchcheckoutsuccess(){
+<<<<<<< HEAD
+=======
 	global $zv_orders_id, $orders_id, $orders, $define_page, $currency;
+>>>>>>> b2b77832c24cffab7b8b6822325cd12ba88b0697
 	$subject = $_SERVER['REQUEST_URI'];
 	$pattern = '/checkout_success.php/';
 	preg_match($pattern, $subject, $matches);

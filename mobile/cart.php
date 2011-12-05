@@ -98,7 +98,11 @@
 	}
 ?>
 <tr>
+<<<<<<< HEAD
 	<td colspan="3" align="right" style="font-weight: bolder;">Total (<?php echo $currency; ?>)</td>
+=======
+	<td colspan="3" align="right" style="font-weight: bolder;">Total <?php echo $currency; ?></td>
+>>>>>>> b2b77832c24cffab7b8b6822325cd12ba88b0697
 	<td style="font-weight: bolder;">$<?php echo number_format($cart->show_total(), 2); ?></td>
 </tr>
 <tr>

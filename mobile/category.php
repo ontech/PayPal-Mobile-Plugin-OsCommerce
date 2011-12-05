@@ -2,6 +2,29 @@
 
 <div>
 	<?php   for ($i=1;$i<sizeof($breadcrumb->_trail);$i++) { ?>
+<<<<<<< HEAD
+=======
+
+        <?php
+                $str = end(explode('_', $breadcrumb->_trail[$i]['link']));
+                $catid = preg_replace('[\D]', '', $str);
+                $trailname = $breadcrumb->_trail[$i]['title'];
+                $cpath = array();
+                preg_match("/cPath=[^&]*/", $breadcrumb->_trail[$i]['link'], $cpath);
+        ?>
+                <a href="
+                <?php
+                if($i<=1) {
+                        echo '/">';
+                } else if($trailname == $theproductname) {
+                        echo '#">';
+                } else {
+                        echo '/category' . $catid . '_1.htm?'.$cpath[0].'">';
+                };
+                echo $breadcrumb->_trail[$i]['title']; ?></a> >
+        <?php } ?>
+</div>
+>>>>>>> b2b77832c24cffab7b8b6822325cd12ba88b0697
 
         <?php
                 $str = end(explode('_', $breadcrumb->_trail[$i]['link']));

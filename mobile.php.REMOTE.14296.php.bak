@@ -1,6 +1,5 @@
 <?php
 	require('includes/application_top.php');
-	require('includes/database_tables.php');
 	require('includes/modules/boxes/bm_categories.php');
 	global $bm_categories, $tree;
 	$bm_categories = new bm_categories();
@@ -46,11 +45,9 @@ matchcart();
 function matchcheckoutsuccess(){
 	global $zv_orders_id, $orders_id, $orders, $define_page, $currency;
 	$subject = $_SERVER['REQUEST_URI'];
-	$pattern = '/checkout_success.php/';
+	$pattern = '/index.php\?main_page=checkout_success/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
-		global $zv_orders_id, $orders_id, $orders, $customer_id, $order, $define_page, $language, $cart;
-		require(DIR_WS_CLASSES . 'order.php');
 		include 'mobile/checkoutsuccess.php';
 		die();
 	}
@@ -68,18 +65,6 @@ function matchminicart() {
 	}
 }
 matchminicart();
-
-function matchcookies() {
-	global $cart, $cartShowTotal, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
-	$pattern = '/cookies.php/';
-	preg_match($pattern, $subject, $matches);
-	if ($matches) {
-		include 'mobile/cookies.php';
-		die();
-	}
-}
-matchcookies();
 
 function matchminicartview() {
 	global $cart, $cartShowTotal, $currency;
