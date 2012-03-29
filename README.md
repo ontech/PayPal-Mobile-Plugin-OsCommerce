@@ -1,16 +1,16 @@
 PayPal Mobile Plugin Installation Instructions
 ==============================================
 <sup> Powered by [ezimerchant](http://ezimerchant.com/)</sup>
-<strong>OsCommerce 2.3+ instructions</strong>
+<sup>OsCommerce 2.3+ instructions</sup>
 
 1. Click the 'ZIP' button at the top of this page to download the plugin.
 
 2. If you haven't already setup PayPal Express Checkout inside your OsCommerce installation, please follow these instructions, if you have already done so, please skip to step 3:
     + a. Login into your PayPal account
     + b. Under the 'My Account' tab, click 'Profile'
-    + c. Under the 'Account Information' section, click the 'Request API credentials' button next the API Access line.
-    + d. Under Option 2 on the next screen, click 'View API Signature'
-    + e. You will use these details on the page to fill out the API credentials in OsCommerce.
+    + c. Under the 'Account Information' section, click the 'Request API credentials' link or 'API Access' link.
+    + d. Under Option 2 on the next screen, click 'View API Signature' or 'Request API credentials'. You may need to click 'Agree and Submit'
+    + e. You will use these details on the page to fill out the API credentials in OsCommerce. You should see API Username, API Password and Signature.
     + f. Login to OsCommerce
     + g. Go to Modules -> Payment and click on PayPal Express checkout.
     + h. Use the details from step 2e. and copy and paste the details accross. 
