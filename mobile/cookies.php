@@ -2,7 +2,7 @@
 <html lang="en"><head>
     <title>OsCommerce</title>
 
-    <link rel="search" type="application/opensearchdescription+xml" href="/osd.xml" title="{if MerchantName}{MerchantName} {/if}Site Search"/>
+    <link rel="search" type="application/opensearchdescription+xml" href="osd.xml" title="{if MerchantName}{MerchantName} {/if}Site Search"/>
 
 	<script src="mobile/js/jquery-1.6.2.min.js"></script>
 	<script src="mobile/js/jquery.mobile-1.0b3.min.js"></script>
@@ -24,17 +24,17 @@
 <div id="mainpage" data-role="page" data-theme="b">
 
 	<div data-role="header" data-theme="b" style="background:#fff; z-index: 1000;">
-<a href="/" data-role="none" data-inline="true"><img src="/images/store_logo.png"
+<a href="" data-role="none" data-inline="true"><img src="images/store_logo.png"
 style="vertical-align: top; margin-top: -4px; margin-left: -2px; max-height: 45px; max-width: 200px;"/></a>
 		<h1></h1>
 		<a href="#" data-role="none"><img src="mobile/images/napaypal.png" style="width: 70px; margin-top: 2px;"/></a>
 			
 	    <div data-role="navbar">
 	    	<ul>
-	            <li><a id="home" href="/">Home</a><span class="ui-icon ui-icon-custom"></span></li>
+	            <li><a id="home" href="">Home</a><span class="ui-icon ui-icon-custom"></span></li>
 	            <li><a id="categories" rel="external">Categories</a><span class="ui-icon ui-icon-custom"></span></li>
-	            <li><a id="search" href="/search/" rel="external">Search</a><span class="ui-icon ui-icon-custom"></span></li>
-	            <li><a id="cartlink" class="carticon" href="/index.php?main_page=shopping_cart" rel="external" class="ui-icon ui-icon-custom">Cart <span class="MiniCartQty" style="text-align:center; font-size: 10px; font-weight: normal; width: 20px; height: 15px; z-index: 200; float: right; padding-left: 1px; padding-bottom: 3px; padding-top:2px;"><?php if(isset($_SESSION['cart'])) { echo $_SESSION['cart']->count_contents(); } else { echo 0; } ?></span></a></li>
+	            <li><a id="search" href="search/" rel="external">Search</a><span class="ui-icon ui-icon-custom"></span></li>
+	            <li><a id="cartlink" class="carticon" href="index.php?main_page=shopping_cart" rel="external" class="ui-icon ui-icon-custom">Cart <span class="MiniCartQty" style="text-align:center; font-size: 10px; font-weight: normal; width: 20px; height: 15px; z-index: 200; float: right; padding-left: 1px; padding-bottom: 3px; padding-top:2px;"><?php if(isset($_SESSION['cart'])) { echo $_SESSION['cart']->count_contents(); } else { echo 0; } ?></span></a></li>
 	        </ul>
 	    </div><!-- /navbar -->					
 	</div><!-- /header -->	
@@ -48,7 +48,7 @@ style="vertical-align: top; margin-top: -4px; margin-left: -2px; max-height: 45p
 <p>Sorry, cookies are currently not enabled in your browser, cookies are necessary to shop on this site, you will be able to 
 find a preference in your phone's browser to re-enable them again if you wish to do so.</p>
 
-You can <a href="/">click here</a> once you have enabled them again to start shopping.
+You can <a href="">click here</a> once you have enabled them again to start shopping.
 
 <?php include 'footer.php' ?>
 

@@ -1,7 +1,18 @@
 <?php
-	require('includes/application_top.php');
-	require('includes/database_tables.php');
-	require('includes/modules/boxes/bm_categories.php');
+error_reporting(E_ALL);
+	if(isset($_GET["main_page"]) && $_GET["main_page"] == "login")
+	{
+		unset($_SESSION['paypal_ec_token']);
+		header("HTTP/1.1 303 See Other");
+		header("Location: http://".$_SERVER[HTTP_HOST]."/ipn_main_handler.php?type=ec");
+	}
+
+	define('SKIP_SINGLE_PRODUCT_CATEGORIES', 'False');
+	$catalog_path = "";
+	$includes = array('includes/application_top.php', 'includes/database_tables.php', 'includes/modules/boxes/bm_categories.php');
+	if(file_exists(reset($includes)))
+	    foreach($includes as $file) require($file);
+	
 	global $bm_categories, $tree;
 	$bm_categories = new bm_categories();
 	$bm_categories->getData();
@@ -9,23 +20,39 @@
 ?>
 
 <?php
+function requestURI(){
+   
+  $requestURI = $_SERVER['REQUEST_URI']; 
+  
+  $catalogFolder = DIR_WS_CATALOG;
+  $catalogFolder = preg_replace("/\\/$/", "", $catalogFolder);
+  $subject = preg_replace("/".preg_quote($catalogFolder, "/")."/", "", $requestURI);
+  return array(
+      $requestURI,
+      $catalogFolder,
+      $subject
+  );
+}
+
 function matchhome() {
 	global $bm_categories, $tree, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/^\/(?:$|\?)/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
 		return true;
 	}
-	
 	return false;
 }
-
 if(matchhome()) {
   	$select_column_list = 'pd.products_name, p.products_image, ';
-    $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "'";
-    $categories_query = tep_db_query("select count(*) as total from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$category_links[$i] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
-    $categories = tep_db_fetch_array($categories_query);
+        $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "'";
+        
+        $categories_query = tep_db_query("select count(*) as total from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$category_links[$i] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
+        $categories = tep_db_fetch_array($categories_query);
+        
+        
 	global $listing_sql, $db, $listing_query, $categories;
 	include 'mobile/index.php';
 	die();
@@ -33,7 +60,7 @@ if(matchhome()) {
 
 function matchcart() {
 	global $bm_categories, $tree, $cart, $cartShowTotal, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/(index.php\?main_page=shopping_cart|shopping_cart.php)/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {	
@@ -45,7 +72,7 @@ matchcart();
 
 function matchcheckoutsuccess(){
 	global $zv_orders_id, $orders_id, $orders, $define_page, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/checkout_success.php/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -59,7 +86,7 @@ matchcheckoutsuccess();
 
 function matchminicart() {
 	global $cart, $cartShowTotal, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/minicart.php/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -71,7 +98,7 @@ matchminicart();
 
 function matchcookies() {
 	global $cart, $cartShowTotal, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/cookies.php/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -83,7 +110,7 @@ matchcookies();
 
 function matchminicartview() {
 	global $cart, $cartShowTotal, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/minicartview.php/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -96,7 +123,7 @@ matchminicartview();
 function matchcategory(){
 	global $currency;
 
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/category/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -118,7 +145,7 @@ if(matchcategory())
 
 function matchproduct() {
 	global $sql, $currency;
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/^\/prod\d+\.htm(?:$|\?)/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -135,7 +162,7 @@ if(matchproduct()) {
 function matchgallery() {
 	global $currency;
 
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/gallery/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {
@@ -155,7 +182,7 @@ if(matchgallery()) {
 function matchsearch() {
 	global $currency;
 
-	$subject = $_SERVER['REQUEST_URI'];
+	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/(^\/search\/?(?:$|\?)|^\/advanced_search_result.php)/';
 	preg_match($pattern, $subject, $matches);
 	if ($matches) {

@@ -34,15 +34,15 @@
 	<div id="gallery" data-role="content" style="min-height: 600px; background-color: #000; background-image: none;">
 	<div style="height:350px;">
 		<div style="position: relative;">
-			<img style="display: none; z-index: 1; position: absolute;" id="loading" src="/images/ajax-loader.gif" />
-			<img id="hero" src="/images/<?php echo $product_info['products_image']; ?>" width="100%" style="max-height:350px; max-width:370px; display:block; margin-left:auto; margin-right:auto;" />
+			<img style="display: none; z-index: 1; position: absolute;" id="loading" src="images/ajax-loader.gif" />
+			<img id="hero" src="images/<?php echo $product_info['products_image']; ?>" width="100%" style="max-height:350px; max-width:370px; display:block; margin-left:auto; margin-right:auto;" />
 		</div>
 	</div>
 	</div>
 
 	<div data-role="footer" data-position="fixed" data-theme="a">
 	<ul class="gallery-icon-list" style="overflow: auto; clear: both;">
-		<li><a rel="external" href="/productimage_{ID}.jpg?width=470"><img src="/productimage_{ID}.jpg?width=64&height=64" /></a></li>
+		<li><a rel="external" href="productimage_{ID}.jpg?width=470"><img src="productimage_{ID}.jpg?width=64&height=64" /></a></li>
 			<li><a rel="external" href="{src}?width=470"></a></li>
 	</ul>
 	</div>

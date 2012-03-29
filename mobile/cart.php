@@ -109,7 +109,7 @@
 </table>
 
 <div style="text-align:center; padding-top:10px;">
-	<a rel="external" href="/ext/modules/payment/paypal/express.php">
+	<a rel="external" href="ext/modules/payment/paypal/express.php">
 		    <img id="paypalbutton" src="mobile/images/btn_checkout_278x43.png" />
 		    <img style="display:none;" src="mobile/images/btn_checkout_278x43down.png" />
     </a>

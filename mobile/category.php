@@ -12,18 +12,18 @@
         ?>
                 <a href="<?php
                 if($i<=1) {
-                        echo '/';
+                        echo DIR_WS_CATALOG;
                 } else if($trailname == $theproductname) {
                         echo '#';
                 } else {
-                        echo '/category' . $catid . '_1.htm?'.$cpath[0];
-                };?>"><?php echo $breadcrumb->_trail[$i]['title'];?></a> &gt;
+                        echo 'category' . $catid . '_1.htm?'.$cpath[0];
+                };?>"><?php echo $breadcrumb->_trail[$i]['title'];?></a> &raquo;
         <?php } ?>
 </div>
 
 <ul data-role="listview" data-inset="true" style="margin-top:15px;">
 	<?php
-			if (isset($cPath) && strpos('_', $cPath)) {
+			if (isset($cPath) && strpos( $cPath, '_')) {
 		// check to see if there are deeper categories within the current category
 			  $category_links = array_reverse($cPath_array);
 			  for($i=0, $n=sizeof($category_links); $i<$n; $i++) {
@@ -81,15 +81,15 @@ $listings = 0;
 <table width="100%">
 <tr>
 	<td colspan="2" align="left">
-		<a href="/prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><?php echo $listing['products_name']; ?></a>
+		<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><?php echo $listing['products_name']; ?></a>
 	</td>
 </tr>
 <tr>
 <td width="0" style="vertical-align: top;">
-	<a href="/prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="/images/<?php echo $listing['products_image']; ?>" width="100"/></a>
+	<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo $listing['products_image']; ?>" width="100"/></a>
 </td>
 <td align="left">
-		<form method="post" action="/cart/index.php?action=add_product" class="productform">
+		<form method="post" action="cart/index.php?action=add_product" class="productform">
 			<input type="hidden" name="products_id" value="<?php echo $listing['products_id']; ?>"/>
 			<input type="hidden" name="cart_quantity" value="1" maxlength="6" size="4">
 

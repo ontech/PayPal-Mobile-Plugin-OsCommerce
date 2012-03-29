@@ -189,10 +189,10 @@ h1.fn {
 }
 .nav-glyphish-example .ui-btn .ui-btn-inner { padding-top: 40px !important; }
 .nav-glyphish-example .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: none !important; border-radius: none !important; }
-#home .ui-icon { background:  url(/images/home.png) 50% 50% no-repeat; background-size: 26px 24px; }
-#categories .ui-icon { background:  url(/images/categories.png) 50% 50% no-repeat;  background-size: 26px 24px;  }
-#search .ui-icon { background:  url(/images/search.png) 50% 50% no-repeat;   background-size: 28px 28px; }
-#carticon .ui-icon { background:  url(/images/cart.png) 50% 50% no-repeat;   background-size: 26px 24px; }
+#home .ui-icon { background:  url(../images/home.png) 50% 50% no-repeat; background-size: 26px 24px; }
+#categories .ui-icon { background:  url(../images/categories.png) 50% 50% no-repeat;  background-size: 26px 24px;  }
+#search .ui-icon { background:  url(../images/search.png) 50% 50% no-repeat;   background-size: 28px 28px; }
+#carticon .ui-icon { background:  url(../images/cart.png) 50% 50% no-repeat;   background-size: 26px 24px; }
 
 
 #ezi-minicart-popup td {

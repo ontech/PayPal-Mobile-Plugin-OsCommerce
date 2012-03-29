@@ -19,13 +19,13 @@
 		<a href="
 		<?php 
 		if($i==0) {
-			echo '/">';
+			echo DIR_WS_CATALOG.'">';
 		} else if($trailname == $theproductname) {
 			echo '#">';
 		} else {
-			echo '/category' . $catid . '_1.htm?'.$cpath[0].'">';
+			echo 'category' . $catid . '_1.htm?'.$cpath[0].'">';
 		};
-		echo $breadcrumb->_trail[$i]['title']; ?></a> >
+		echo $breadcrumb->_trail[$i]['title']; ?></a> &raquo;
 	<?php } ?>
 </div>
 
@@ -41,7 +41,7 @@
 			<div style="z-index: 2; background-color: #fff; position: absolute; top: -1px; left: -2px; width: 124px; height: 125px; box-shadow: 1px 1px #888; border: 1px solid #ddd; -webkit-transform: rotate(1deg);"></div>
 			<div style="z-index: 3; background-color: #fff; position: absolute; top: 0px; left: -2px; width: 124px; height: 125px; box-shadow: 1px 1px #666; border: 1px solid #ddd; -webkit-transform: rotate(1.5deg);"></div>
 
-			<a href="gallery<?php echo $product_info['products_id']; ?>.htm?products_id=<?php echo $product_info['products_id']; ?>" style="position: absolute; top: 0px; left: 0px; display: block; z-index: 4;"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="/images/<?php echo $product_info['products_image']; ?>" width="100"/></a>
+			<a href="gallery<?php echo $product_info['products_id']; ?>.htm?products_id=<?php echo $product_info['products_id']; ?>" style="position: absolute; top: 0px; left: 0px; display: block; z-index: 4;"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo $product_info['products_image']; ?>" width="100"/></a>
 		</div>
 	</td>
 	<td  align="left" valign="top">

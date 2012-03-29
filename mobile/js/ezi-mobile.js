@@ -39,7 +39,7 @@ $("#mainpage").live('pageshow', function(){
 
 				$.ajax({
 					type: "GET",
-					url: "../minicart.php",
+					url: "minicart.php",
 					data : { "type" : "html" },
 					dataType : "html",
 					cache : true,
@@ -220,7 +220,6 @@ $("#search, #categories, .carticon").live("click", function(evt) {
 
 	var Link = $(this);	
 	var Panel = $("#" + {"search" : "searchpanel", "categories" : "cat", "cartlink" : "cartpanel"}[this.id]);	
-console.log("hello");
 	if(!Panel.is(":visible"))
 	{
 		var Content = $("[data-role=page] [data-role=content]");
@@ -257,7 +256,7 @@ console.log("hello");
 				
 				$.ajax({
 					type: "GET",
-					url: "../minicartview.php",
+					url: "minicartview.php",
 					data : { "type" : "html" },
 					dataType : "html",
 					cache : false,
