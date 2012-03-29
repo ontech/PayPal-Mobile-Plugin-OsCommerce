@@ -1,7 +1,7 @@
 PayPal Mobile Plugin Installation Instructions
 ==============================================
 <sup> Powered by [ezimerchant](http://ezimerchant.com/)</sup>
-<sup>OsCommerce 2.3+ instructions</sup>
+ <sup>OsCommerce 2.3+ instructions</sup>
 
 1. Click the 'ZIP' button at the top of this page to download the plugin.
 
