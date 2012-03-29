@@ -16,7 +16,7 @@ PayPal Mobile Plugin Installation Instructions
     + h. Use the details from step 2e. and copy and paste the details accross. 
     + i. Hit Save.
 
-3. Unpack the contents of the plugin into the root of your webserver directory (eg public_html, httpdocs, www). mobile.php will be in the in webserver directory, while the 'mobile' folder will be a subdirectory within that webserver directory. When you extract the zip, it will create a directory for the files called something like "PayPal-Mobile-Plugin-OsCommerce". You must move the files out of this directory in order for the plugin to work. 
+3. Unpack the contents of the plugin into the catalog folder of your webserver directory. mobile.php will be in the in catalog directory, while the 'mobile' folder will be a subdirectory within that catalog folder. When you extract the zip, it will create a directory for the files called something like "PayPal-Mobile-Plugin-OsCommerce". You must move the files out of this directory in order for the plugin to work. 
 
 4. Make a backup your current .htaccess file inside your public hosting directory - if you have one.
 
