@@ -1,5 +1,6 @@
 <?php
-error_reporting(E_ALL);
+	ini_set('display_errors', 'off');
+
 	if(isset($_GET["main_page"]) && $_GET["main_page"] == "login")
 	{
 		unset($_SESSION['paypal_ec_token']);
