@@ -10,15 +10,15 @@
                 $cpath = array();
                 preg_match("/cPath=[^&]*/", $breadcrumb->_trail[$i]['link'], $cpath);
         ?>
-                <a href="<?php
-                if($i<=1) {
-                        echo DIR_WS_CATALOG;
-                } else if($trailname == $theproductname) {
-                        echo '#';
-                } else {
-                        echo 'category' . $catid . '_1.htm?'.$cpath[0];
-                };?>"><?php echo $breadcrumb->_trail[$i]['title'];?></a> &raquo;
-        <?php } ?>
+            <a href="<?php
+            if($i<=1) {
+                    echo DIR_WS_CATALOG;
+            } else if($trailname == $theproductname) {
+                    echo '#';
+            } else {
+                    echo 'category' . $catid . '_1.htm?'.$cpath[0];
+            };?>"><?php echo $breadcrumb->_trail[$i]['title'];?></a> &raquo;
+    <?php } ?>
 </div>
 
 <ul data-role="listview" data-inset="true" style="margin-top:15px;">
@@ -94,14 +94,14 @@ $listings = 0;
 			<input type="hidden" name="cart_quantity" value="1" maxlength="6" size="4">
 
 			<table align="center" style="margin-left:auto; margin-right:auto;" width="100"><tr><td style="border:none; vertical-align:middle">					
-					<span class="listprice">
-						<?php
-						if(specials_new_products_price)
-							echo $listing['was $' . number_format(specials_new_products_price , 2)]; ?>
-					</span>
+					<?php if($listing['products_price'] != $listing['final_price']) { ?>
+					<del class="listprice">
+							<?php echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
+					</del>					
 					<br />
-					<span class="price">
-						<?php if(!specials_new_products_price) echo 'now'; ?> $<?php echo number_format($listing['final_price'] , 2); ?>
+					<?php } ?>
+					<span class="price <?php if($listing['products_price'] != $listing['final_price']) { ?>productSpecialPrice<?php } ?>">
+						<?php echo $currencies->display_price($listing['final_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
 					</span>
 				
 			</td></tr><tr><td style="border:none; vertical-align:middle;">

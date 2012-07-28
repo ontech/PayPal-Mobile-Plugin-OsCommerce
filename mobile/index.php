@@ -33,15 +33,15 @@ $listing_query = tep_db_query($listing_split->sql_query);
 			<input type="hidden" name="products_id" value="<?php echo $listing['products_id']; ?>"/>
 			<input type="hidden" name="cart_quantity" value="1" maxlength="6" size="4">
 
-			<table align="center" style="margin-left:auto; margin-right:auto;" width="100"><tr><td style="border:none; vertical-align:middle">					
-					<span class="listprice">
-						<?php
-						if(specials_new_products_price)
-							echo $listing['was $' . number_format(specials_new_products_price , 2)]; ?>
-					</span>
+			<table align="center" style="margin-left:auto; margin-right:auto;" width="100"><tr><td style="border:none; vertical-align:middle">
+					<?php if($listing['products_price'] != $listing['final_price']) { ?>
+					<del class="listprice">
+							<?php echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
+					</del>					
 					<br />
-					<span class="price">
-						<?php if(!specials_new_products_price) echo 'now'; ?> $<?php echo number_format($listing['final_price'] , 2); ?>
+					<?php } ?>
+					<span class="price <?php if($listing['products_price'] != $listing['final_price']) { ?>productSpecialPrice<?php } ?>">
+						<?php echo $currencies->display_price($listing['final_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
 					</span>
 				
 			</td></tr><tr><td style="border:none; vertical-align:middle;">
@@ -65,13 +65,6 @@ $listing_query = tep_db_query($listing_split->sql_query);
 
 </ul>
 
-
-<?php
-	//print_r($listing);
-	//echo "<br /><br />";
-	//print_r($subcategories);
-	//print_r($breadcrumb->_trail);
-?>
 
 <?php include 'footer.php'; ?>
 

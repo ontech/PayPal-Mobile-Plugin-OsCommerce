@@ -46,22 +46,25 @@
 	</td>
 	<td  align="left" valign="top">
 			<a href="#" class="url" style="font-size:18px"><?php echo $product_info['products_name']; ?></a>
-			
+
 		<table align="center" style="margin-left:auto; margin-right:auto; margin-top:20px;"><tr><td style="border:none; vertical-align:middle; text-align:center;">
 		<span style="font-size:15px;">
-            <span class="listprice">
-				<?php
-					if(specials_new_products_price)
-						echo $product_info['was $' . number_format(specials_new_products_price , 2)]; ?>
-				</span>
-				<br />
-				<span class="price">
-					<?php if(!specials_new_products_price) echo 'now'; ?> $<?php echo number_format($product_info['products_price'] , 2); ?>
-			</span>
-            
-            <!--{if DisplayCurrencies}
-            <span class="currencyprice">({Format PriceConverted, DisplayCurrency} {DisplayCurrency} <a href="#">&dagger;</a>)</span>
-            {/if}-->
+					<?php $new_price = tep_get_products_special_price($product_info['products_id']) ?>
+		
+					<?php if($new_price) { ?>
+					<del class="listprice">
+							<?php echo $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])); ?>
+					</del>					
+					<br />
+					<span class="price productSpecialPrice">
+						<?php echo $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])); ?>
+					</span>
+					<?php } else { ?>
+					<span class="price">
+						<?php echo $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])); ?>
+					</span>					
+					<?php } ?>
+
         </span>
         <br />
 		<input type="submit" data-theme="e" id="addtocart" value="Add to Cart" />
@@ -120,13 +123,6 @@
 		?>
 		</div>
 </form>
-
-<?php
-	//print_r ($breadcrumb);
-	//print_r ($product_info);
-	//print_r ($_SESSION);
-	//echo $_GET['products_id'];
-?>
 
 <?php include 'footer.php'; ?>
 
