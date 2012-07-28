@@ -32,29 +32,28 @@ if ($_GET['keywords'])
 <table width="100%">
 <tr>
 	<td colspan="2" align="left">
-		<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><?php echo $listing['products_name']; ?></a>
+		<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><?php echo htmlspecialchars($listing['products_name']); ?></a>
 	</td>
 </tr>
 <tr>
 <td width="0" style="vertical-align: top;">
-	<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo $listing['products_image']; ?>" width="100"/></a>
+	<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo htmlspecialchars($listing['products_image']); ?>" width="100"/></a>
 </td>
 <td align="left">
-		<!--div class="unavailable">{include field="UnavailableMessageHTML"}</div-->
-		<!--{if BuyButtonID}-->	
+
 		<form method="post" action="cart/index.php?action=add_product" class="productform">
 			<input type="hidden" name="products_id" value="<?php echo $listing['products_id']; ?>"/>
 			<input type="hidden" name="cart_quantity" value="1" maxlength="6" size="4">
 
 			<table align="center" style="margin-left:auto; margin-right:auto;" width="100"><tr><td style="border:none; vertical-align:middle">					
-					<span class="listprice">
-						<?php
-						if(specials_new_products_price)
-							echo $listing['was $' . number_format(specials_new_products_price , 2)]; ?>
-					</span>
+					<?php if($listing['products_price'] != $listing['final_price']) { ?>
+					<del class="listprice">
+							<?php echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
+					</del>					
 					<br />
-					<span class="price">
-						<?php if(!specials_new_products_price) echo 'now'; ?> $<?php echo number_format($listing['final_price'] , 2); ?>
+					<?php } ?>
+					<span class="price <?php if($listing['products_price'] != $listing['final_price']) { ?>productSpecialPrice<?php } ?>">
+						<?php echo $currencies->display_price($listing['final_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
 					</span>
 				
 			</td></tr><tr><td style="border:none; vertical-align:middle;">
@@ -64,7 +63,7 @@ if ($_GET['keywords'])
 			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;">More info...</a>
 			</td></tr></table>
 		</form>
-		<!--{/if}-->
+		
 </td>
 </tr>
 </table>		
@@ -83,11 +82,6 @@ if ($_GET['keywords'])
 } else {
 echo '<p>No results</p>';
 }
-
-//$_GET['keyword'] = trim($_GET['keyword']);
-//echo $_GET['keyword'];
-//echo '<br /><br />';
-//print_r ($result);
 
 ?>
 

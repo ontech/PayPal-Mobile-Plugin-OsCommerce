@@ -1,4 +1,5 @@
 <?php
+
 	ini_set('display_errors', 'off');
 
 	if(isset($_GET["main_page"]) && $_GET["main_page"] == "login")
@@ -13,7 +14,15 @@
 	$includes = array('includes/application_top.php', 'includes/database_tables.php', 'includes/modules/boxes/bm_categories.php');
 	if(file_exists(reset($includes)))
 	    foreach($includes as $file) require($file);
-	
+	else //doesn't work
+	{
+	    $result = file_get_contents((@$_SERVER["HTTPS"] ? "https://" : "http://") . $_SERVER['HTTP_HOST']. "/ezifind.php");
+	    parse_str($result, $path);
+	    //echo $path['catalog_physical'];
+	    foreach($includes as $file) require($path['catalog_physical'].$file);
+	    $catalog_path = $path['catalog_physical'];
+	  
+	}
 	global $bm_categories, $tree;
 	$bm_categories = new bm_categories();
 	$bm_categories->getData();
@@ -60,7 +69,7 @@ if(matchhome()) {
 }
 
 function matchcart() {
-	global $bm_categories, $tree, $cart, $cartShowTotal, $currency;
+	global $bm_categories, $tree, $cart, $cartShowTotal, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/(index.php\?main_page=shopping_cart|shopping_cart.php)/';
 	preg_match($pattern, $subject, $matches);
@@ -86,7 +95,7 @@ function matchcheckoutsuccess(){
 matchcheckoutsuccess();
 
 function matchminicart() {
-	global $cart, $cartShowTotal, $currency;
+	global $cart, $cartShowTotal, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/minicart.php/';
 	preg_match($pattern, $subject, $matches);
@@ -110,7 +119,7 @@ function matchcookies() {
 matchcookies();
 
 function matchminicartview() {
-	global $cart, $cartShowTotal, $currency;
+	global $cart, $cartShowTotal, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/minicartview.php/';
 	preg_match($pattern, $subject, $matches);
@@ -145,7 +154,7 @@ if(matchcategory())
 }
 
 function matchproduct() {
-	global $sql, $currency;
+	global $sql, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/^\/prod\d+\.htm(?:$|\?)/';
 	preg_match($pattern, $subject, $matches);
@@ -181,7 +190,7 @@ if(matchgallery()) {
 }
 
 function matchsearch() {
-	global $currency;
+	global $currency, $currencies;
 
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/(^\/search\/?(?:$|\?)|^\/advanced_search_result.php)/';
