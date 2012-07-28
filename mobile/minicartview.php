@@ -35,8 +35,8 @@ for ($i=0;$i<sizeof($products);$i++) {
 		<table>	
 			<tr>
 				<td><div style="width:30px;"><?php echo $products[$i]['quantity'];?></div></td>
-				<td align="left"><div style="width:180px; padding-top:5px; height:20px; white-space:nowrap; overflow: hidden; text-overflow:ellipsis;"><?php echo $products[$i]['name']; ?></div></td>
-				<td align="left"><div style="width:60px;">$<?php echo number_format(($products[$i]['final_price'] * $products[$i]['quantity']), 2); ?></div></td>
+				<td align="left"><div style="width:180px; padding-top:5px; height:20px; white-space:nowrap; overflow: hidden; text-overflow:ellipsis;"><?php echo htmlspecialchars($products[$i]['name']); ?></div></td>
+				<td align="left"><div style="width:60px;"> <?php echo $currencies->display_price($products[$i]['final_price'], $products[$i]['tax_class_id'], $products[$i]['quantity']); ?></div></td>
 			</tr>
 		</table>
 		</div>
@@ -51,7 +51,7 @@ for ($i=0;$i<sizeof($products);$i++) {
     <tr>
         <td><div style="width: 214px; padding-top: 5px; text-align: left;">Total (<?php echo $currency; ?>)</div></td>
         <td align="left">
-            <div style="width:60px;">$<?php echo $_SESSION['cart']->show_total();?></div>
+            <div style="width:60px;"> <?php echo $currencies->format($_SESSION['cart']->show_total());?></div>
         </td>
     </tr>
 </tfoot>

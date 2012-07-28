@@ -71,8 +71,8 @@
 		}
 	?>
 	</td>
-	<td><?php echo $products[$i]['name']; ?> </td>
-	<td>$<?php echo number_format($products[$i]['final_price'] * $products[$i]['quantity'], 2); ?> </td>
+	<td><?php echo htmlspecialchars($products[$i]['name']); ?> </td>
+	<td><?php echo $currencies->display_price($products[$i]['final_price'], $products[$i]['tax_class_id'], $products[$i]['quantity']); ?> </td>
 	<td style="text-align:center;">
 	<?php
 	echo '<a rel="external" href="' . tep_href_link(FILENAME_SHOPPING_CART, 'products_id=' . $products[$i]['id'] . '&action=remove_product') . '"><img src="mobile/images/delete.png" /></a>';
@@ -98,8 +98,8 @@
 	}
 ?>
 <tr>
-	<td colspan="3" align="right" style="font-weight: bolder;">Total <?php echo $currency; ?></td>
-	<td style="font-weight: bolder;">$<?php echo number_format($cart->show_total(), 2); ?></td>
+	<td colspan="3" align="right" style="font-weight: bolder;">Total (<?php echo $currency; ?>)</td>
+	<td style="font-weight: bolder;"><?php echo $currencies->format($cart->show_total()); ?></td>
 </tr>
 <tr>
 <td colspan="5" style="text-align:center;">
