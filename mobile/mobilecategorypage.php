@@ -8,7 +8,7 @@ $m = 1;
 		<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
 		<?php   while ($m) { ?>
 		<?php if(!$mobile_category_tree[$m]['parent']) { ?>
-		<li class="ui-li ui-li-static ui-body-c"><?php if($mobile_category_tree[$m]['parent']){echo "---- ";} ?><a href="category<?php echo htmlspecialchars(preg_replace('/^cPath=/', '', $mobile_category_tree[$m]['path'])); ?>_1.htm?cPath=<?php echo htmlspecialchars(preg_replace('/^cPath=/', '', $mobile_category_tree[$m]['path'])); ?>" class="ui-link"><?php echo $mobile_category_tree[$m]['name'] ?> </a></li>
+		<li class="ui-li ui-li-static ui-body-c"><?php if($mobile_category_tree[$m]['parent']){echo "---- ";} ?><a href="category<?php echo htmlspecialchars(preg_replace('/^cPath=/', '', $mobile_category_tree[$m]['path'])); ?>_1.htm?cPath=<?php echo htmlspecialchars(preg_replace('/^cPath=/', '', $mobile_category_tree[$m]['path'])); ?>" class="ui-link"><?php echo htmlspecialchars($mobile_category_tree[$m]['name']); ?> </a></li>
 		<?php } ?>
 		<?php 	$m = $mobile_category_tree[$m]['next_id']; } ?>
 		</ul>

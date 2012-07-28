@@ -5,8 +5,8 @@
     <link rel="search" type="application/opensearchdescription+xml" href="osd.xml" title="{if MerchantName}{MerchantName} {/if}Site Search"/>
 
 <script>
-document.cookie = "fred=fred;";
-if(!/fred/i.test(document.cookie))
+document.cookie = "checkit=checkit;";
+if(!/checkit/i.test(document.cookie))
 {
 	window.location = "/cookies.php";
 }

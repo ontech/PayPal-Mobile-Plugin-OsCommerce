@@ -25,7 +25,7 @@
 		} else {
 			echo 'category' . $catid . '_1.htm?'.$cpath[0].'">';
 		};
-		echo $breadcrumb->_trail[$i]['title']; ?></a> &raquo;
+		echo htmlspecialchars($breadcrumb->_trail[$i]['title']); ?></a> &raquo;
 	<?php } ?>
 </div>
 
@@ -41,11 +41,11 @@
 			<div style="z-index: 2; background-color: #fff; position: absolute; top: -1px; left: -2px; width: 124px; height: 125px; box-shadow: 1px 1px #888; border: 1px solid #ddd; -webkit-transform: rotate(1deg);"></div>
 			<div style="z-index: 3; background-color: #fff; position: absolute; top: 0px; left: -2px; width: 124px; height: 125px; box-shadow: 1px 1px #666; border: 1px solid #ddd; -webkit-transform: rotate(1.5deg);"></div>
 
-			<a href="gallery<?php echo $product_info['products_id']; ?>.htm?products_id=<?php echo $product_info['products_id']; ?>" style="position: absolute; top: 0px; left: 0px; display: block; z-index: 4;"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo $product_info['products_image']; ?>" width="100"/></a>
+			<a href="gallery<?php echo $product_info['products_id']; ?>.htm?products_id=<?php echo $product_info['products_id']; ?>" style="position: absolute; top: 0px; left: 0px; display: block; z-index: 4;"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo htmlspecialchars($product_info['products_image']); ?>" width="100"/></a>
 		</div>
 	</td>
 	<td  align="left" valign="top">
-			<a href="#" class="url" style="font-size:18px"><?php echo $product_info['products_name']; ?></a>
+			<a href="#" class="url" style="font-size:18px"><?php echo htmlspecialchars($product_info['products_name']); ?></a>
 
 		<table align="center" style="margin-left:auto; margin-right:auto; margin-top:20px;"><tr><td style="border:none; vertical-align:middle; text-align:center;">
 		<span style="font-size:15px;">
@@ -102,7 +102,7 @@
           $selected_attribute = false;
         }
 ?>
-      <strong><?php echo $products_options_name['products_options_name'] . ':'; ?></strong><br /><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute); ?><br />
+      <strong><?php echo htmlspecialchars($products_options_name['products_options_name']) . ':'; ?></strong><br /><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute); ?><br />
 <?php
       }
 ?>

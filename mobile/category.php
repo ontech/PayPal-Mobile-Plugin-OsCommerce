@@ -17,7 +17,7 @@
                     echo '#';
             } else {
                     echo 'category' . $catid . '_1.htm?'.$cpath[0];
-            };?>"><?php echo $breadcrumb->_trail[$i]['title'];?></a> &raquo;
+            };?>"><?php echo htmlspecialchars($breadcrumb->_trail[$i]['title']);?></a> &raquo;
     <?php } ?>
 </div>
 
@@ -81,12 +81,12 @@ $listings = 0;
 <table width="100%">
 <tr>
 	<td colspan="2" align="left">
-		<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><?php echo $listing['products_name']; ?></a>
+		<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><?php echo htmlspecialchars($listing['products_name']); ?></a>
 	</td>
 </tr>
 <tr>
 <td width="0" style="vertical-align: top;">
-	<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo $listing['products_image']; ?>" width="100"/></a>
+	<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>"><img class="photo" style="margin-top:3px; margin-left:auto; margin-right:auto;" src="images/<?php echo htmlspecialchars($listing['products_image']); ?>" width="100"/></a>
 </td>
 <td align="left">
 		<form method="post" action="cart/index.php?action=add_product" class="productform">
