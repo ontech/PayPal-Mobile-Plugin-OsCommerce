@@ -5,7 +5,7 @@ RewriteCond %{REQUEST_URI}      !/includes
 RewriteCond %{REQUEST_URI}      !/images
 RewriteCond %{REQUEST_URI} 		!/ipn_main_handler.php
 RewriteCond %{REQUEST_URI} 		!/ext/modules/payment/paypal/express.php
-RewriteCond %{HTTP_USER_AGENT} /iPhone|Android|\s+Mobile
-RewriteRule .* mobile.php [E=template:phone]
-RewriteCond %{HTTP_USER_AGENT} iPad|(Android^((?!mobile).)*$)
-RewriteRule .* mobile.php [E=template:tablet]
+RewriteCond %{HTTP_USER_AGENT} iPad|iPod|iPhone|Android|s+Mobile 
+RewriteCond %{HTTP_USER_AGENT} !iPad 
+RewriteRule .* mobile.php [L] 
+# izemerchant 
