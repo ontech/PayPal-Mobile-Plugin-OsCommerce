@@ -67,7 +67,7 @@
 
         </span>
         <br />
-		<input type="submit" data-theme="e" id="addtocart" value="Add to Cart" />
+		<input type="submit" data-theme="e" id="addtocart" value="<?php echo $_['Add to Cart']; ?>" />
 		</td></tr></table>
 		
 	</td>
@@ -81,7 +81,7 @@
     if ($products_attributes['total'] > 0) {
 ?>
 
-    <p>Product Options</p>
+    <p><?php echo $_['Product Options']; ?></p>
 
     <p>
 <?php
@@ -118,7 +118,7 @@
 		if ($description) {
 			echo $description;
 		} else {
-			echo 'There is no description for this product'; 
+			echo $_['There is no description for this product']; 
 		};	
 		?>
 		</div>

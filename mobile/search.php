@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 
-<div>Search Results</div>
+<div><?php echo $_['Search Results']; ?></div>
 
 <form action="advanced_search_result.php" method="get" class="searchpopup">
 	<table><tr><td>
@@ -18,7 +18,7 @@ if ($_GET['keywords'])
 {
 ?>
 <ul data-role="listview" data-inset="true" id="products" class="products" style="margin-top: 8px;">
-	<li data-role="list-divider">Products</li>
+	<li data-role="list-divider"><?php echo $_['Products']; ?></li>
 
 	<?php
     while ($listing = tep_db_fetch_array($listing_query)) {
@@ -58,9 +58,9 @@ if ($_GET['keywords'])
 				
 			</td></tr><tr><td style="border:none; vertical-align:middle;">
 			<?php if (!(tep_has_product_attributes($listing['products_id']))) {?>
-			<input type="submit" class="buy" data-theme="e" value="Add to Cart" /><br/>
+			<input type="submit" class="buy" data-theme="e" value="<?php echo $_['Add to Cart']; ?>" /><br/>
 			<?php } ?>	
-			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;">More info...</a>
+			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;"><?php echo $_['More info...']; ?></a>
 			</td></tr></table>
 		</form>
 		
@@ -80,7 +80,7 @@ if ($_GET['keywords'])
 <?php
 
 } else {
-echo '<p>No results</p>';
+ echo "<p>" . $_['No results'] . "</p>";
 }
 
 ?>

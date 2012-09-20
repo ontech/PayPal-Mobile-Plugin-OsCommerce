@@ -1,24 +1,22 @@
 <?php include 'header.php'; ?>
 
-<h1>Cart</h1>
+<h1><?php echo $_['Cart']; ?></h1>
 
 <?php 
 	echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_SHOPPING_CART, 'action=update_product'));
 	
 	if ($_SESSION['cart']->count_contents() == 0) {
-	
-	echo '<p>Your cart is empty</p>';
-	
+	   echo  "<p>" . $_['Your cart is empty']. "</p>";
 	} else {
 ?>
 
 <table id="cart" cellpadding="5" align="center">
 <tr>
-	<th style="border-right:0px !important;">Qty</th>
+	<th style="border-right:0px !important;"><?php echo $_['Qty']; ?></th>
 	<th style="border-left:0px !important;"> &nbsp;</th>
-	<th>Name</th>
-	<th>Price</th>
-	<th>Delete </th>
+	<th><?php echo $_['Name']; ?></th>
+	<th><?php echo $_['Price']; ?></th>
+	<th><?php echo $_['Delete']; ?> </th>
 </tr>
 
 <?php
@@ -98,20 +96,20 @@
 	}
 ?>
 <tr>
-	<td colspan="3" align="right" style="font-weight: bolder;">Total (<?php echo $currency; ?>)</td>
+	<td colspan="3" align="right" style="font-weight: bolder;"><?php echo $_['Total']; ?> (<?php echo $currency; ?>)</td>
 	<td style="font-weight: bolder;"><?php echo $currencies->format($cart->show_total()); ?></td>
 </tr>
 <tr>
 <td colspan="5" style="text-align:center;">
-<input type="submit" value="Update Cart">
+<input type="submit" value="<?php echo $_['Update Cart']; ?>"
 </td>
 </tr>
 </table>
 
 <div style="text-align:center; padding-top:10px;">
-	<a rel="external" href="ext/modules/payment/paypal/express.php">
-		    <img id="paypalbutton" src="mobile/images/btn_checkout_278x43.png" />
-		    <img style="display:none;" src="mobile/images/btn_checkout_278x43down.png" />
+	<a rel="external" href="<?php echo IPN_HANDLER ?>?type=ec">
+		    <img id="paypalbutton" src="<?php echo $_SESSION['PaypalLanguages']['checkoutWithPaypal'] ?>" />
+		    <img style="display:none;" src="<?php echo $_SESSION['PaypalLanguages']['checkoutWithPaypal'] ?>" />
     </a>
 </div>
 

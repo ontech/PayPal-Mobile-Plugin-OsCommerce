@@ -1,7 +1,7 @@
 <?php include 'header.php' ?>
 
-<h1>Oops</h1>
+<h1><?php echo $_['Oops']; ?></h1>
 
-<p>Sorry, the page you visited doesn't exist</p>
+<p><?php echo $_['Sorry the page you visited does not exist']; ?></p>
 
 <?php include 'footer.php' ?>

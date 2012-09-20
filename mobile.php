@@ -23,19 +23,132 @@
 	    $catalog_path = $path['catalog_physical'];
 	  
 	}
+
+	if(defined("PROJECT_VERSION"))
+	{
+			preg_match("/\d+\.?\d+/",PROJECT_VERSION, $matches);
+			if($matches)
+				define("PP_OSC_VERSION", (float)$matches[0]);
+			else
+				define("PP_OSC_VERSION", 2.3);
+	}
+	else
+		define("PP_OSC_VERSION", 2.3);
+
+
+
+	if(PP_OSC_VERSION<2.3)
+	{
+		define("IPN_HANDLER", preg_replace("/\/+$/","",DIR_WS_CATALOG) . "/ext/modules/payment/paypal/express_mobile.php");
+
+		if(!function_exists("tep_draw_button")) {
+			function tep_draw_button($title = null, $icon = null, $link = null, $priority = null, $params = null) {
+			static $button_counter = 1;
+
+			$types = array('submit', 'button', 'reset');
+
+			if ( !isset($params['type']) ) {
+			  $params['type'] = 'submit';
+			}
+
+			if ( !in_array($params['type'], $types) ) {
+			  $params['type'] = 'submit';
+			}
+
+			if ( ($params['type'] == 'submit') && isset($link) ) {
+			  $params['type'] = 'button';
+			}
+
+			if (!isset($priority)) {
+			  $priority = 'secondary';
+			}
+
+			$button = '<span class="tdbLink">';
+
+			if ( ($params['type'] == 'button') && isset($link) ) {
+			  $button .= '<a id="tdb' . $button_counter . '" href="' . $link . '"';
+
+			  if ( isset($params['newwindow']) ) {
+				$button .= ' target="_blank"';
+			  }
+			} else {
+			  $button .= '<button id="tdb' . $button_counter . '" type="' . tep_output_string($params['type']) . '"';
+			}
+
+			if ( isset($params['params']) ) {
+			  $button .= ' ' . $params['params'];
+			}
+
+			$button .= '>' . $title;
+
+			if ( ($params['type'] == 'button') && isset($link) ) {
+			  $button .= '</a>';
+			} else {
+			  $button .= '</button>';
+			}
+
+			$button .= '</span><script type="text/javascript">$("#tdb' . $button_counter . '").button(';
+
+			$args = array();
+
+			if ( isset($icon) ) {
+			  if ( !isset($params['iconpos']) ) {
+				$params['iconpos'] = 'left';
+			  }
+
+			  if ( $params['iconpos'] == 'left' ) {
+				$args[] = 'icons:{primary:"ui-icon-' . $icon . '"}';
+			  } else {
+				$args[] = 'icons:{secondary:"ui-icon-' . $icon . '"}';
+			  }
+			}
+
+			if (empty($title)) {
+			  $args[] = 'text:false';
+			}
+
+			if (!empty($args)) {
+			  $button .= '{' . implode(',', $args) . '}';
+			}
+
+			$button .= ').addClass("ui-priority-' . $priority . '").parent().removeClass("tdbLink");</script>';
+
+			$button_counter++;
+
+			return $button;
+		  }
+		}
+	}
+	else
+	{
+		define("IPN_HANDLER", "ipn_main_handler.php");
+	}
+	
+	$defaults = array(
+		'languages_code' => 'en',
+		'language' => 'english',
+		'languages_id' => 1
+	);
+	$_SESSION = array_merge($defaults, $_SESSION);
+	include("mobile/language_".$_SESSION['languages_code'] .".php");
+
+	$_SESSION['PaypalLanguages'] = array();
+	$_SESSION['PaypalLanguages']['language'] = $_SESSION['languages_code'] . "_" . strtoupper($_SESSION['languages_code']);
+	$_SESSION['PaypalLanguages']['checkoutWithPaypal'] = "mobile/images/" . $_SESSION['PaypalLanguages']['language'] . "/_buttons/@2x/normal/CO_" . $_SESSION['PaypalLanguages']['language'] . "_orange_19x24@2x.png";
+	$_SESSION['PaypalLanguages']['checkoutWithPaypalDown'] = "mobile/images/" . $_SESSION['PaypalLanguages']['language'] . "/_buttons/@2x/normal/CO_" . $_SESSION['PaypalLanguages']['language'] . "_orange_19x24@2x.png";
+	$_SESSION['paypal_ec_markflow'] = 1;
+
 	global $bm_categories, $tree;
 	$bm_categories = new bm_categories();
 	$bm_categories->getData();
 	global $products;
-?>
 
-<?php
 function requestURI(){
    
   $requestURI = $_SERVER['REQUEST_URI']; 
   
   $catalogFolder = DIR_WS_CATALOG;
-  $catalogFolder = preg_replace("/\\/$/", "", $catalogFolder);
+  $catalogFolder = preg_replace("/\/+$/", "", $catalogFolder);
   $subject = preg_replace("/".preg_quote($catalogFolder, "/")."/", "", $requestURI);
   return array(
       $requestURI,
@@ -67,68 +180,72 @@ if(matchhome()) {
 	include 'mobile/index.php';
 	die();
 }
-
+ 
 function matchcart() {
 	global $bm_categories, $tree, $cart, $cartShowTotal, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/(index.php\?main_page=shopping_cart|shopping_cart.php)/';
 	preg_match($pattern, $subject, $matches);
-	if ($matches) {	
-		include 'mobile/cart.php';
-		die();	
-	}
+	return (boolean) $matches;
 }
-matchcart();
+if(matchcart())
+{
+    include 'mobile/cart.php';
+    die();	
+}
 
 function matchcheckoutsuccess(){
 	global $zv_orders_id, $orders_id, $orders, $define_page, $currency;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/checkout_success.php/';
 	preg_match($pattern, $subject, $matches);
-	if ($matches) {
-		global $zv_orders_id, $orders_id, $orders, $customer_id, $order, $define_page, $language, $cart;
-		require(DIR_WS_CLASSES . 'order.php');
-		include 'mobile/checkoutsuccess.php';
-		die();
-	}
+	return (boolean) $matches; 
 }
-matchcheckoutsuccess();
-
-function matchminicart() {
+if(matchcheckoutsuccess())
+{
+	require(DIR_WS_CLASSES . 'order.php');
+	include 'mobile/checkoutsuccess.php';
+	die();
+}
+function matchminicart() 
+{
 	global $cart, $cartShowTotal, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/minicart.php/';
 	preg_match($pattern, $subject, $matches);
-	if ($matches) {
-		include 'mobile/minicart.php';
-		die();
-	}
+	return (boolean) $matches;
 }
-matchminicart();
+if(matchminicart())
+{
+	include 'mobile/minicart.php';
+	die();
+}
 
 function matchcookies() {
 	global $cart, $cartShowTotal, $currency;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/cookies.php/';
 	preg_match($pattern, $subject, $matches);
-	if ($matches) {
-		include 'mobile/cookies.php';
-		die();
-	}
+	return (boolean) $matches;
 }
-matchcookies();
+if(matchcookies())
+{
+	include 'mobile/cookies.php';
+	die();
+}
 
 function matchminicartview() {
 	global $cart, $cartShowTotal, $currency, $currencies;
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/minicartview.php/';
 	preg_match($pattern, $subject, $matches);
-	if ($matches) {
-		include 'mobile/minicartview.php';
-		die();
-	}
+	return (boolean)$matches;
 }
-matchminicartview();
+if(matchminicartview())
+{
+	include 'mobile/minicartview.php';
+	die();
+}
 
 function matchcategory(){
 	global $currency;
@@ -195,12 +312,13 @@ function matchsearch() {
 	list($requestURI, $catalogFolder, $subject) = requestURI();
 	$pattern = '/(^\/search\/?(?:$|\?)|^\/advanced_search_result.php)/';
 	preg_match($pattern, $subject, $matches);
-	if ($matches) {
-    $select_column_list = 'pd.products_name, p.products_image, ';
-	$listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . 1 . "' and pd.products_name like '%" . $_GET['keywords'] ."%'";
-	include 'mobile/search.php';
-		die();
-	}
+	return (boolean) $matches;
 }
-matchsearch();
+if(matchsearch())
+{
+	    $select_column_list = 'pd.products_name, p.products_image, ';
+	    $listing_sql = "select " . $select_column_list . " p.products_id, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . 1 . "' and pd.products_name like '%" . $_GET['keywords'] ."%'";
+	    include 'mobile/search.php';
+}
+ 
 ?>

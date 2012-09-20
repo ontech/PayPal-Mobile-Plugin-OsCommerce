@@ -65,7 +65,7 @@ $listings = 0;
 	<?php $listing = tep_db_fetch_array($listing_query); ?>
 
 	<?php if($listing) { $listings = 1; ?>
-	<li data-role="list-divider">Products</li>
+	<li data-role="list-divider"><?php echo $_['Products']; ?></li>
 	<?php } ?>
 
 	<?php
@@ -106,9 +106,9 @@ $listings = 0;
 				
 			</td></tr><tr><td style="border:none; vertical-align:middle;">
 			<?php if (!(tep_has_product_attributes($listing['products_id']))) {?>
-			<input type="submit" class="buy" data-theme="e" value="Add to Cart" /><br/>
+			<input type="submit" class="buy" data-theme="e" value="<?php echo $_['Add to Cart'] ?>" /><br/>
 			<?php } ?>	
-			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;">More info...</a>
+			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;"><?php echo $_['More info...']; ?></a>
 			</td></tr></table>
 		</form>
 </td>
@@ -128,7 +128,7 @@ $listings = 0;
 <?php
 if($number_of_categories == 0 && $listings == 0)
 {
-	echo "No Products in this category";
+	echo $_['No Products in this category'];
 }
 ?>
 

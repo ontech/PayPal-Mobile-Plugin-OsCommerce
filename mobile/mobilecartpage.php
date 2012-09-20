@@ -12,22 +12,22 @@
 	</span>
 
 	<div id="PayPalExpressCheckout">
-	<a rel="external" href="ext/modules/payment/paypal/express.php">
-		    <img id="paypalbutton" src="mobile/images/btn_checkout_278x43.png" />
-		    <img style="display:none;" src="mobile/images/btn_checkout_278x43down.png" />
+	<a rel="external" href="<?php echo IPN_HANDLER ?>?type=ec">
+				<img id="paypalbutton" src="<?php echo $_SESSION['PaypalLanguages']['checkoutWithPaypal'] ?>" />
+				<img style="display:none;" src="<?php echo $_SESSION['PaypalLanguages']['checkoutWithPaypalDown'] ?>" />
     </a>
     </div>
 	
-	OR
+	<?php echo $_['OR']; ?>
 
 	<div style="padding: 10px;">	
-	<a href="index.php?main_page=shopping_cart" rel="external" style="color: #fff; font-size: 110%;">Edit Cart</a>
+	<a href="index.php?main_page=shopping_cart" rel="external" style="color: #fff; font-size: 110%;"><?php echo $_['Edit Cart']; ?></a>
 	</div>
 
-	OR
+	<?php echo $_['OR']; ?>
 
 	<div style="padding: 10px;">	
-	<a href="#" style="color: #fff; font-size: 110%;">Continue Shopping</a>
+	<a href="#" style="color: #fff; font-size: 110%;"><?php echo $_['Continue Shopping'] ?></a>
 	</div>
 	
 </div>

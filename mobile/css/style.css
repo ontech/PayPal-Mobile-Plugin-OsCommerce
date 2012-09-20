@@ -79,7 +79,9 @@ body {
 	display:block;
 	padding-bottom:3px;
 }
-
+.brief .ui-btn-text {
+	color:#333 !important;
+}
 .ui-header .ui-title {
 	min-height: 26px;
 }

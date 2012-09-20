@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-    <title><?php echo TITLE;?></title>
-
-    <link rel="search" type="application/opensearchdescription+xml" href="osd.xml" title="{if MerchantName}{MerchantName} {/if}Site Search"/>
+    <title><?php echo $_['TITLE']; ?></title>
+    <meta charset="UTF-8">
+    <link rel="search" type="application/opensearchdescription+xml" href="osd.xml" title="<?php echo $_['Search']; ?>"/>
 
 <script>
 document.cookie = "checkit=checkit;";
@@ -39,13 +39,13 @@ style="vertical-align: top; margin-top: -4px; margin-left: -2px; max-height: 45p
 			
 	    <div data-role="navbar">
 	    	<ul>
-	            <li><a id="home" href="<?php echo DIR_WS_CATALOG ?>">Home</a><span class="ui-icon ui-icon-custom"></span></li>
-	            <li><a id="categories" rel="external">Categories</a><span class="ui-icon ui-icon-custom"></span></li>
-	            <li><a id="search" href="search/" rel="external">Search</a><span class="ui-icon ui-icon-custom"></span></li>
-	            <li><a id="cartlink" class="carticon" href="index.php?main_page=shopping_cart" rel="external" class="ui-icon ui-icon-custom">Cart <span class="MiniCartQty" style="text-align:center; font-size: 10px; font-weight: normal; width: 20px; height: 15px; z-index: 200; float: right; padding-left: 1px; padding-bottom: 3px; padding-top:2px;"><?php if(isset($_SESSION['cart'])) { echo $_SESSION['cart']->count_contents(); } else { echo 0; } ?></span></a></li>
+	            <li><a id="home" href="<?php echo DIR_WS_CATALOG ?>"><?php echo $_['Home']; ?></a><span class="ui-icon ui-icon-custom"></span></li>
+	            <li><a id="categories" rel="external"><?php echo $_['Categories']; ?></a><span class="ui-icon ui-icon-custom"></span></li>
+	            <li><a id="search" href="search/" rel="external"><?php echo $_['Search']; ?></a><span class="ui-icon ui-icon-custom"></span></li>
+	            <li><a id="cartlink" class="carticon" href="index.php?main_page=shopping_cart" rel="external" class="ui-icon ui-icon-custom"><?php echo $_['Cart'] ?> <span class="MiniCartQty" style="text-align:center; font-size: 10px; font-weight: normal; width: 20px; height: 15px; z-index: 200; float: right; padding-left: 1px; padding-bottom: 3px; padding-top:2px;"><?php if(isset($_SESSION['cart'])) { echo $_SESSION['cart']->count_contents(); } else { echo 0; } ?></span></a></li>
 	        </ul>
 	    </div><!-- /navbar -->					
 	</div><!-- /header -->	
 
 	<div id="content" data-role="content">	
-	
+

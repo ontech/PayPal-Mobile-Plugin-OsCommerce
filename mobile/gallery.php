@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><?php echo $listing->fields['products_name']; ?> Gallery</title>
+<title><?php echo $listing->fields['products_name']; ?><?php echo $_['Gallery']; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<script src="mobile/js/jquery-1.6.2.min.js"></script>
@@ -27,7 +27,7 @@
 <div data-role="page" data-theme="b" data-fullscreen="true">
 
 	<div data-role="header" data-position="fixed" data-theme="b" style="text-align: right;">
-		<a href="#" data-rel="back" data-role="button" data-icon="back" data-inline="true">Done</a>		
+		<a href="#" data-rel="back" data-role="button" data-icon="back" data-inline="true"><?php echo $_['Done']; ?></a>		
 		<h1></h1>
 	</div><!-- /header -->
 

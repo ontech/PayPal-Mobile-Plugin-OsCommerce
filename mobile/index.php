@@ -5,7 +5,7 @@ $listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 
 $listing_query = tep_db_query($listing_split->sql_query);
 ?>
 <ul data-role="listview" data-inset="true" id="products" class="products" style="margin-top: 8px;">
-	<li data-role="list-divider">Featured Products</li>
+	<li data-role="list-divider"><?php echo $_['Featured Products']; ?></li>
 
 	<?php
     while ($listing = tep_db_fetch_array($listing_query)) {
@@ -35,9 +35,9 @@ $listing_query = tep_db_query($listing_split->sql_query);
 
 			<table align="center" style="margin-left:auto; margin-right:auto;" width="100"><tr><td style="border:none; vertical-align:middle">
 					<?php if($listing['products_price'] != $listing['final_price']) { ?>
-					<del class="listprice">
+					<span class="listprice">
 							<?php echo $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])); ?>
-					</del>					
+					</span>					
 					<br />
 					<?php } ?>
 					<span class="price <?php if($listing['products_price'] != $listing['final_price']) { ?>productSpecialPrice<?php } ?>">
@@ -46,9 +46,12 @@ $listing_query = tep_db_query($listing_split->sql_query);
 				
 			</td></tr><tr><td style="border:none; vertical-align:middle;">
 			<?php if (!(tep_has_product_attributes($listing['products_id']))) {?>
-			<input type="submit" class="buy" data-theme="e" value="Add to Cart" /><br/>
-			<?php } ?>	
-			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;">More info...</a>
+			<input type="submit" class="buy" data-theme="e" value="<?php echo $_['Add to Cart']; ?>" /><br/>
+			<?php } else { ?>	
+			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" data-role="button" data-theme="e"><?php echo $_['Add to Cart']; ?></a><br/>
+			<?php } ?>
+			<a href="prod<?php echo $listing['products_id']; ?>.htm?products_id=<?php echo $listing['products_id']; ?>" class="ui-link" style="color: #2489CE !important; text-shadow: none;"><?php echo $_['More info...']; ?></a>
+
 			</td></tr></table>
 		</form>
 		<!--{/if}-->

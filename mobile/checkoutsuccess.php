@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 
-<h1 id="checkoutSuccessHeading">Thank You! We Appreciate your Business!</h1>
+<h1 id="checkoutSuccessHeading"><?php echo $_['Thank You! We Appreciate your Business!']; ?></h1>
 
 <?php 
 		require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_SUCCESS);
@@ -16,9 +16,9 @@
 
 <div style="background:#fff; border:1px solid #ccc; padding:10px; text-align:center; font-weight:bold;">
 
-<p>Your order number is: <?php echo $orders['orders_id']; ?></p>
+<p><?php echo str_replace('{order}', $orders_id, $_['Your order number is x']); ?></p>
 
-<p>Your customer id: </p>
+<p><?php echo $_['Your customer id:']; ?> </p>
 
 </div>
 
