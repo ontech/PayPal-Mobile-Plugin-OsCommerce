@@ -46,6 +46,7 @@ RewriteCond %{REQUEST_URI}      !/images
 RewriteCond %{REQUEST_URI} 		!/ipn_main_handler.php
 RewriteCond %{REQUEST_URI} 		!/checkout_confirmation.php
 RewriteCond %{REQUEST_URI} 		!/checkout_process.php
+RewriteCond %{REQUEST_URI} 		!/ext/modules/payment/paypal/express_mobile.php
 RewriteCond %{REQUEST_URI} 		!/ext/modules/payment/paypal/express.php
 RewriteCond %{HTTP_USER_AGENT} iPad|iPod|iPhone|Android|\s+Mobile 
 RewriteCond %{HTTP_USER_AGENT} !iPad 
